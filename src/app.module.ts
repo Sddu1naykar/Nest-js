@@ -1,8 +1,8 @@
+// src/app.module.ts
 import { Module } from '@nestjs/common';
 import { TypeOrmModule } from '@nestjs/typeorm';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
-import { User } from './user.Entity';
+import { AuthModule } from './auth/auth.module';
+import { User } from './auth/UserEnity/user.entity';
 
 @Module({
   imports: [
@@ -13,12 +13,10 @@ import { User } from './user.Entity';
       username: 'postgres',
       password: 'postgres',
       database: 'studentDB',
-      entities: [User], // Add your entities here
+      entities: [User],
       synchronize: true,
     }),
-    TypeOrmModule.forFeature([User]), // Make the User entity available for injection
+    AuthModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
 })
 export class AppModule {}
